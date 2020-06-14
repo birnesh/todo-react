@@ -6,12 +6,13 @@ import Todo from './components/pages/todo';
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <h1>hello world</h1>
+      {/* <div className="App">
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/todo" component={Todo} />
         </Switch>
-      </div>
+      </div> */}
     </Router>
   );
 };
