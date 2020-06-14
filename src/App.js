@@ -5,15 +5,15 @@ import Todo from './components/pages/todo';
 
 const App = () => {
   return (
-    <Router>
-      <h1>hello world</h1>
-      {/* <div className="App">
-        <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/todo" component={Todo} />
-        </Switch>
-      </div> */}
-    </Router>
+    <h1>hello</h1>
+    // <Router>
+    //   <div className="App">
+    //     <Switch>
+    //       <Route path="/" exact component={Login} />
+    //       <Route path="/todo" component={Todo} />
+    //     </Switch>
+    //   </div>
+    // </Router>
   );
 };
 
