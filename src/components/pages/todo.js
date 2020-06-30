@@ -4,7 +4,7 @@ import TodoCard from '../molecules/todoCard';
 
 const Todo = () => {
   const [todos, setTodos] = useState([]);
-  const listUsers = () => {
+  const getTodos = () => {
     Axios.get('https://birnesh-todo.herokuapp.com/todo').then((res) => {
       console.log(res);
       if (res.status === 200) {
@@ -14,15 +14,11 @@ const Todo = () => {
     });
   };
   useEffect(() => {
-    listUsers();
+    getTodos();
   }, []);
-  useEffect(() => console.log('todo diaplay', todos), [todos]);
   return (
     <div>
-      {/* {todos.map((todo, key) => {
-        return <h1 key={key}>{todo.task}</h1>;
-      })} */}
-      <TodoCard todos={todos} />;
+      <TodoCard todos={todos} getTodos={getTodos} />;
     </div>
   );
 };
