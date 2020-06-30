@@ -12,19 +12,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TextBox(props) {
-  const { label, credentials, setCredentials, type } = props;
+  const { label, value, onChange, type } = props;
   const classes = useStyles();
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField
-        label={label}
-        value={credentials.label}
-        type={type}
-        onChange={(e) => {
-          setCredentials({ ...credentials, [label]: e.target.value });
-        }}
-      />
+      <TextField label={label} value={value} type={type} onChange={onChange} />
     </form>
   );
 }
