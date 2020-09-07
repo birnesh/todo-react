@@ -1,0 +1,15 @@
+.todo-container{
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    flex-direction: column;
+}
+
+.todo-card{
+    width: 1000px;
+    min-width: 1000px;
+}
+.todo-card .todo-delete{
+    float:right;
+    
+}

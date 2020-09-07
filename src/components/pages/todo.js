@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
-import TodoCard from '../molecules/todoCard';
+import axios from 'axios';
+import TodoList from '../molecules/todoList';
 import AddTodo from '../molecules/addTodo';
 
 const Todo = () => {
@@ -8,27 +8,46 @@ const Todo = () => {
   const [newTodo, setNewTodo] = useState([]);
 
   const getTodos = () => {
-    Axios.get('https://birnesh-todo.herokuapp.com/todo').then((res) => {
+    axios.get('todo/').then((res) => {
       console.log(res);
       if (res.status === 200) {
         console.log(typeof res.data, res.data);
-        setTodos(res.data);
+        setTodos(res.data.results);
+      }
+    });
+  };
+
+  const handleCheckBox = (no, isDone) => {
+    axios.patch(`todo/${no}/`, { is_done: isDone }).then((res) => {
+      if (res.status === 200) {
+        console.log('on check', res);
+        getTodos();
+      }
+    });
+  };
+  const handleDelete = (no) => {
+    axios.delete(`todo/${no}/`).then((res) => {
+      if (res.status === 204) {
+        console.log('on delete', res);
+        getTodos();
       }
     });
   };
 
   const handleTodoPost = () => {
-    Axios.post('https://birnesh-todo.herokuapp.com/todo', {
-      task: newTodo,
-      is_done: false,
-    }).then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-        console.log(typeof res.data, res.data);
-        setNewTodo('');
-        getTodos();
-      }
-    });
+    axios
+      .post('todo/', {
+        task: newTodo,
+        is_done: false,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          console.log(typeof res.data, res.data);
+          setNewTodo('');
+          getTodos();
+        }
+      });
   };
 
   useEffect(() => {
@@ -42,7 +61,11 @@ const Todo = () => {
         setNewTodo={setNewTodo}
         handleTodoPost={handleTodoPost}
       />
-      <TodoCard todos={todos} />;
+      <TodoList
+        todos={todos}
+        handleCheckBox={handleCheckBox}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 };
